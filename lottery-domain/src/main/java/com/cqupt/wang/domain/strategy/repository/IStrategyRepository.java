@@ -1,9 +1,8 @@
 package com.cqupt.wang.domain.strategy.repository;
 
 import com.cqupt.wang.domain.strategy.model.aggregates.StrategyRich;
-import com.cqupt.wang.infrastructure.po.Award;
-import com.cqupt.wang.infrastructure.po.Strategy;
-import com.cqupt.wang.infrastructure.po.StrategyDetail;
+import com.cqupt.wang.domain.strategy.model.vo.AwardBriefVO;
+
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
 public interface IStrategyRepository {
     StrategyRich queryStrategyRich(Long strategyId);
 
-    Award queryAwardInfo(String awardId);
+    AwardBriefVO queryAwardInfo(String awardId);
 
     List<String> queryNoStockStrategyAwardList(Long strategyId);
 

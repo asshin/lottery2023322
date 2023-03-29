@@ -8,7 +8,6 @@ package com.cqupt.wang.domain.strategy.model.vo;
  */
 public class DrawAwardInfo {
 
-
     /**
      * 奖品ID
      */
@@ -28,6 +27,16 @@ public class DrawAwardInfo {
      * 奖品内容「描述、奖品码、sku」
      */
     private String awardContent;
+
+    public DrawAwardInfo() {
+    }
+
+    public DrawAwardInfo(String awardId, Integer awardType, String awardName,String awardContent) {
+        this.awardId = awardId;
+        this.awardType = awardType;
+        this.awardName = awardName;
+        this.awardContent = awardContent;
+    }
 
     public String getAwardId() {
         return awardId;
@@ -58,16 +67,6 @@ public class DrawAwardInfo {
     }
 
     public void setAwardContent(String awardContent) {
-        this.awardContent = awardContent;
-    }
-
-    public DrawAwardInfo() {
-    }
-
-    public DrawAwardInfo(String awardId, Integer awardType, String awardName, String awardContent) {
-        this.awardId = awardId;
-        this.awardType = awardType;
-        this.awardName = awardName;
         this.awardContent = awardContent;
     }
 }

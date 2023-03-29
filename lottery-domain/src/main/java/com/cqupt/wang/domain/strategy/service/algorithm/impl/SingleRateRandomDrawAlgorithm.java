@@ -4,7 +4,6 @@ import com.cqupt.wang.domain.strategy.model.aggregates.StrategyRich;
 import com.cqupt.wang.domain.strategy.model.vo.AwardRateInfo;
 import com.cqupt.wang.domain.strategy.repository.IStrategyRepository;
 import com.cqupt.wang.domain.strategy.service.algorithm.BaseAlgorithm;
-import com.cqupt.wang.infrastructure.po.StrategyDetail;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 

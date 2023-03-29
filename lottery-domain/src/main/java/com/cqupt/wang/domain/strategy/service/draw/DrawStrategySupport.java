@@ -1,9 +1,11 @@
 package com.cqupt.wang.domain.strategy.service.draw;
 
 import com.cqupt.wang.domain.strategy.model.aggregates.StrategyRich;
-import com.cqupt.wang.domain.strategy.repository.impl.StrategyRepository;
-import com.cqupt.wang.infrastructure.po.Award;
-import com.cqupt.wang.infrastructure.po.Strategy;
+import com.cqupt.wang.domain.strategy.model.vo.AwardBriefVO;
+import com.cqupt.wang.domain.strategy.repository.IStrategyRepository;
+
+import org.springframework.beans.BeanUtils;
+
 
 import javax.annotation.Resource;
 
@@ -13,7 +15,7 @@ import javax.annotation.Resource;
  */
 public class DrawStrategySupport extends DrawConfig {
     @Resource
-    protected StrategyRepository strategyRepository;
+    protected IStrategyRepository strategyRepository;
 
 
     /**
@@ -32,8 +34,11 @@ public class DrawStrategySupport extends DrawConfig {
      * @param  awardId 奖品id
      * @return 策略配置信息
      */
-    protected Award queryAwardInfoByAwardId(String awardId){
-        return strategyRepository.queryAwardInfo(awardId);
+    protected AwardBriefVO queryAwardInfoByAwardId(String awardId){
+        AwardBriefVO award = strategyRepository.queryAwardInfo(awardId);
+        AwardBriefVO awardBriefVO = new AwardBriefVO();
+        BeanUtils.copyProperties(award,awardBriefVO);
+        return awardBriefVO;
     }
 
 }

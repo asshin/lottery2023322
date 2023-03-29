@@ -3,15 +3,31 @@ package com.cqupt.wang.domain.strategy.model.vo;
 import java.math.BigDecimal;
 
 /**
- * @author zsw
- * @create 2023-03-23 11:18
+ * @description: 奖品概率信息，奖品编号、库存、概率
+ * @author: 小傅哥，微信：fustack
+ * @date: 2021/9/4
+ * @github: https://github.com/fuzhengwei
+ * @Copyright: 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 public class AwardRateInfo {
-    //奖品ID
-    private  String awardId;
 
-    //中奖概率
+    /**
+     * 奖品ID
+     */
+    private String awardId;
+
+    /**
+     * 中奖概率
+     */
     private BigDecimal awardRate;
+
+    public AwardRateInfo() {
+    }
+
+    public AwardRateInfo(String awardId, BigDecimal awardRate) {
+        this.awardId = awardId;
+        this.awardRate = awardRate;
+    }
 
     public String getAwardId() {
         return awardId;
@@ -26,15 +42,6 @@ public class AwardRateInfo {
     }
 
     public void setAwardRate(BigDecimal awardRate) {
-        this.awardRate = awardRate;
-    }
-
-    public  AwardRateInfo(){
-
-    }
-
-    public AwardRateInfo(String awardId, BigDecimal awardRate) {
-        this.awardId = awardId;
         this.awardRate = awardRate;
     }
 }

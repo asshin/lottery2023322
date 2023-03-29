@@ -1,15 +1,13 @@
 package com.cqupt.wang.domain.strategy.service.draw;
 
 import com.cqupt.wang.common.Constants;
+import com.cqupt.wang.domain.activity.model.vo.StrategyDetailVO;
 import com.cqupt.wang.domain.strategy.model.aggregates.StrategyRich;
 import com.cqupt.wang.domain.strategy.model.req.DrawReq;
 import com.cqupt.wang.domain.strategy.model.res.DrawResult;
-import com.cqupt.wang.domain.strategy.model.vo.AwardRateInfo;
-import com.cqupt.wang.domain.strategy.model.vo.DrawAwardInfo;
+import com.cqupt.wang.domain.strategy.model.vo.*;
 import com.cqupt.wang.domain.strategy.service.algorithm.IDrawAlgorithm;
-import com.cqupt.wang.infrastructure.po.Award;
-import com.cqupt.wang.infrastructure.po.Strategy;
-import com.cqupt.wang.infrastructure.po.StrategyDetail;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +24,8 @@ public abstract class AbstractDrawBase extends  DrawStrategySupport implements I
     public DrawResult doDrawExec(DrawReq req) {
         //获取抽奖策略配置
         StrategyRich strategyRich = queryStrategyRich(req.getStrategyId());
-        Strategy strategy = strategyRich.getStrategy();
-        List<StrategyDetail> strategyDetailList = strategyRich.getStrategyDetailList();
+        StrategyBriefVO strategy = strategyRich.getStrategy();
+        List<StrategyDetailBriefVO> strategyDetailList = strategyRich.getStrategyDetailList();
         //校验和初始化数据
         checkAndInitRateData(strategy.getStrategyId(),strategy.getStrategyMode(),strategyDetailList);
         IDrawAlgorithm iDrawAlgorithm = drawAlgorithmMap.get(strategy.getStrategyMode());
@@ -64,7 +62,7 @@ public abstract class AbstractDrawBase extends  DrawStrategySupport implements I
      * @param strategyMode       抽奖策略模式
      * @param strategyDetailList 抽奖策略详情
      */
-    public void checkAndInitRateData(Long strategyId, Integer strategyMode, List<StrategyDetail> strategyDetailList) {
+    public void checkAndInitRateData(Long strategyId, Integer strategyMode, List<StrategyDetailBriefVO> strategyDetailList) {
         //只有单项概率要检查是否初始化
 //        if (1 != strategyMode){
 //            return;
@@ -78,7 +76,7 @@ public abstract class AbstractDrawBase extends  DrawStrategySupport implements I
         }
         // 解析并初始化中奖概率数据到散列表
         List<AwardRateInfo> awardRateInfoList = new ArrayList<>(strategyDetailList.size());
-        for (StrategyDetail strategyDetail : strategyDetailList) {
+        for (StrategyDetailBriefVO strategyDetail : strategyDetailList) {
             awardRateInfoList.add(new AwardRateInfo(strategyDetail.getAwardId(), strategyDetail.getAwardRate()));
         }
 
@@ -99,7 +97,7 @@ public abstract class AbstractDrawBase extends  DrawStrategySupport implements I
             logger.info("执行策略抽奖完成【未中奖】，用户：{} 策略ID：{}", uId, strategyId);
             return new DrawResult(uId, strategyId, Constants.DrawState.FAIL.getCode());
         }
-        Award award = queryAwardInfoByAwardId(awardId);
+        AwardBriefVO award = queryAwardInfoByAwardId(awardId);
         DrawAwardInfo drawAwardInfo = new DrawAwardInfo(award.getAwardId(),award.getAwardType(), award.getAwardName(),award.getAwardContent());
         logger.info("执行策略抽奖完成【已中奖】，用户：{} 策略ID：{} 奖品ID：{} 奖品名称：{}", uId, strategyId, awardId, award.getAwardName());
 

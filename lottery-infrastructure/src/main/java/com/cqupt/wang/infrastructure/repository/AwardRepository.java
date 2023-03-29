@@ -1,4 +1,4 @@
-package com.cqupt.wang.domain.award.repository.impl;
+package com.cqupt.wang.infrastructure.repository;
 
 import com.cqupt.wang.domain.award.repository.IAwardRepository;
 import org.springframework.stereotype.Component;
