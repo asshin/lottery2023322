@@ -156,9 +156,35 @@ public class ActivityTest {
 
         activityConfigRich = new ActivityConfigRich(activity, strategy, awardList);
     }
+    @Test
+    public int findTargetSumWays(int[] nums, int target) {
+        int sum=0;
+        for (int i = 0; i < nums.length; i++) {
+            sum+=nums[i];
+        }
+        int y=0;
+        int x=0;
+        if ((sum-3)%2==0){
+              y=(sum-3)/2;
+              x=y+3;
+        }else {
+            return  0;
+        }
+       int fenzi=fact(sum)*fact(sum-y);
+        int fenmu=fact(y);
+        return  fenzi/fenmu;
 
+    }
+    public int fact(int x){
+        int sum=0;
+        for (int i = 1; i <= x; i++) {
+            sum*=i;
+        }
+        return  sum;
+    }
     @Test
     public void test_createActivity() {
+
         activityDeploy.createActivity(new ActivityConfigReq(activityId, activityConfigRich));
     }
 
