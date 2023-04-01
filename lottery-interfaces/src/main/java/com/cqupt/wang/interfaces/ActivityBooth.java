@@ -8,7 +8,7 @@ import com.cqupt.wang.rpc.dto.ActivityDto;
 import com.cqupt.wang.rpc.req.ActivityReq;
 import com.cqupt.wang.rpc.res.ActivityRes;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import javax.annotation.Resource;
 
