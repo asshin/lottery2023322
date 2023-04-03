@@ -44,6 +44,19 @@ public class Activity {
     // 修改时间
     private Date updateTime;
 
+    public Long getStrategyId() {
+        return strategyId;
+    }
+
+    public void setStrategyId(Long strategyId) {
+        this.strategyId = strategyId;
+    }
+
+    /**
+     * 策略ID
+     */
+    private Long strategyId;
+
     public Long getId() {
         return id;
     }

@@ -46,6 +46,10 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cqupt.middleware</groupId>
+            <artifactId>dbrouter</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

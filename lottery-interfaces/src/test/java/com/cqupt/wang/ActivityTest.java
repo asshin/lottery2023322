@@ -4,11 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.cqupt.wang.common.Constants;
 import com.cqupt.wang.domain.activity.model.aggregates.ActivityConfigRich;
 import com.cqupt.wang.domain.activity.model.req.ActivityConfigReq;
+import com.cqupt.wang.domain.activity.model.req.PartakeReq;
+import com.cqupt.wang.domain.activity.model.res.PartakeResult;
 import com.cqupt.wang.domain.activity.model.vo.ActivityVO;
 import com.cqupt.wang.domain.activity.model.vo.AwardVO;
 import com.cqupt.wang.domain.activity.model.vo.StrategyDetailVO;
 import com.cqupt.wang.domain.activity.model.vo.StrategyVO;
 import com.cqupt.wang.domain.activity.service.deploy.IActivityDeploy;
+import com.cqupt.wang.domain.activity.service.partake.IActivityPartake;
 import com.cqupt.wang.domain.activity.service.stateflow.IStateHandler;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,8 +42,10 @@ public class ActivityTest {
     @Resource
     private IStateHandler stateHandler;
 
-    private ActivityConfigRich activityConfigRich;
+    @Resource
+    private IActivityPartake activityPartake;
 
+    private ActivityConfigRich activityConfigRich;
     /**
      * TODO：后面编写ID生成策略
      */
@@ -156,32 +161,7 @@ public class ActivityTest {
 
         activityConfigRich = new ActivityConfigRich(activity, strategy, awardList);
     }
-    @Test
-    public int findTargetSumWays(int[] nums, int target) {
-        int sum=0;
-        for (int i = 0; i < nums.length; i++) {
-            sum+=nums[i];
-        }
-        int y=0;
-        int x=0;
-        if ((sum-3)%2==0){
-              y=(sum-3)/2;
-              x=y+3;
-        }else {
-            return  0;
-        }
-       int fenzi=fact(sum)*fact(sum-y);
-        int fenmu=fact(y);
-        return  fenzi/fenmu;
 
-    }
-    public int fact(int x){
-        int sum=0;
-        for (int i = 1; i <= x; i++) {
-            sum*=i;
-        }
-        return  sum;
-    }
     @Test
     public void test_createActivity() {
 
@@ -194,5 +174,13 @@ public class ActivityTest {
         logger.info("审核通过，测试：{}", JSON.toJSONString(stateHandler.checkPass(120981321L, Constants.ActivityState.ARRAIGNMENT)));
         logger.info("运行活动，测试：{}", JSON.toJSONString(stateHandler.doing(120981321L, Constants.ActivityState.PASS)));
         logger.info("二次提审，测试：{}", JSON.toJSONString(stateHandler.checkPass(120981321L, Constants.ActivityState.EDIT)));
+    }
+
+    @Test
+    public void test_activityPartake() {
+        PartakeReq req = new PartakeReq("Uhdgkw766120d", 100001L);
+        PartakeResult res = activityPartake.doPartake(req);
+        logger.info("请求参数：{}", JSON.toJSONString(req));
+        logger.info("测试结果：{}", JSON.toJSONString(res));
     }
 }
